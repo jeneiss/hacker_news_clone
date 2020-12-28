@@ -1,11 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import Nav from './components/Nav'
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      stories: 'top'
+    }
+  }
+
   render() {
     return (
-      <div>
-        Hello world
+      <div id='wrapper'>
+        <Nav />
       </div>
     )
   }
