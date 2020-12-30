@@ -3,18 +3,30 @@ import ReactDOM from 'react-dom'
 import Nav from './components/Nav'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
 
     this.state = {
-      stories: 'top'
+      storyType: 'top',
+      storyList: []
     }
+
+    this.handleClick = this.handleClick.bind(this)
   }
+
+  handleClick(type) {
+    this.setState({ storyType: type})
+    console.log(this.state.storyType)
+  }
+
 
   render() {
     return (
       <div id='wrapper'>
-        <Nav />
+        <Nav
+          type={this.state.storyType}
+          handleClick={this.handleClick}
+        />
       </div>
     )
   }
