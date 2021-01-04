@@ -1,6 +1,9 @@
 import React from 'react'
 import Nav from './Nav'
 
+import Stories from './Stories'
+import { getStories } from '../utils/api'
+
 export default class App extends React.Component {
   constructor() {
     super()
@@ -13,10 +16,29 @@ export default class App extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  handleClick(type) {
-    this.setState({ storyType: type})
+  componentDidMount() {
+    getStories(this.state.storyType).then((items) => {
+      this.setState({
+        storyList: {
+            [this.state.storyType]: items
+        }
+      })
+    })
   }
 
+  handleClick(type) {
+    this.setState({ storyType: type})
+
+    if (!this.state.storyList[type]) {
+      getStories(this.state.storyType).then((items) => {
+        this.setState({
+          storyList: {
+              [this.state.storyType]: items
+          }
+        })
+      })
+    }
+  }
 
   render() {
     return (
@@ -24,6 +46,10 @@ export default class App extends React.Component {
         <Nav
           type={this.state.storyType}
           handleClick={this.handleClick}
+        />
+        <Stories
+          type={this.state.storyType}
+          stories={this.state.storyList}
         />
       </div>
     )
