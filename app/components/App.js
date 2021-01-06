@@ -30,13 +30,15 @@ export default class App extends React.Component {
     this.setState({ storyType: type})
 
     if (!this.state.storyList[type]) {
-      getStories(this.state.storyType).then((items) => {
-        this.setState({
-          storyList: {
-            [this.state.storyType]: items
-          }
+      getStories(this.state.storyType)
+        .then((items) => {
+          this.setState({
+            storyList: {
+              [this.state.storyType]: items
+            }
+          })
         })
-      })
+        .catch((err) => console.log(err, "Error accessing story llist"))
     }
   }
 
