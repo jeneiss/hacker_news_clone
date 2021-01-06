@@ -9,7 +9,7 @@ export default function Stories(props) {
         <li key={story.id}>
           <a href={story.url}>{story.title}</a>
           <div>
-            <div>by {story.by} on DATE with {story.descendants} comments</div>
+            <div>by {story.by} on DATE with {story.descendants} {story.descendants === 1 ? 'comment' : 'comments'}</div>
           </div>
         </li>
       )

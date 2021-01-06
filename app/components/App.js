@@ -20,7 +20,7 @@ export default class App extends React.Component {
     getStories(this.state.storyType).then((items) => {
       this.setState({
         storyList: {
-            [this.state.storyType]: items
+          [this.state.storyType]: items
         }
       })
     })
@@ -33,7 +33,7 @@ export default class App extends React.Component {
       getStories(this.state.storyType).then((items) => {
         this.setState({
           storyList: {
-              [this.state.storyType]: items
+            [this.state.storyType]: items
           }
         })
       })
