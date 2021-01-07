@@ -1,7 +1,8 @@
 import React from 'react'
 import Nav from './Nav'
-
 import Stories from './Stories'
+import Loading from './Loading'
+
 import { getStories } from '../utils/api'
 
 export default class App extends React.Component {
@@ -9,50 +10,55 @@ export default class App extends React.Component {
     super()
 
     this.state = {
-      storyType: 'top',
-      storyList: []
+      type: 'top',
+      list: null,
     }
 
     this.handleClick = this.handleClick.bind(this)
+    this.handleFetch = this.handleFetch.bind(this)
   }
 
   componentDidMount() {
-    getStories(this.state.storyType).then((items) => {
-      this.setState({
-        storyList: {
-          [this.state.storyType]: items
-        }
-      })
+    this.handleFetch()
+  }
+
+  componentDidUpdate() {
+    if (!this.state.list) this.handleFetch()
+  }
+
+  handleClick(e) {
+    const type = e.target.name
+
+    this.setState({
+      type,
+      list: null
     })
   }
 
-  handleClick(type) {
-    this.setState({ storyType: type})
-
-    if (!this.state.storyList[type]) {
-      getStories(this.state.storyType)
-        .then((items) => {
-          this.setState({
-            storyList: {
-              [this.state.storyType]: items
-            }
-          })
-        })
-        .catch((err) => console.log(err, "Error accessing story llist"))
-    }
+  handleFetch() {
+    getStories(this.state.type)
+      .then((list) => {
+        this.setState({ list })
+      })
+      .catch((err) => console.log(err))
   }
 
   render() {
+    const { type, list } = this.state
+
     return (
       <div id='wrapper'>
         <Nav
-          type={this.state.storyType}
+          type={type}
           handleClick={this.handleClick}
         />
-        <Stories
-          type={this.state.storyType}
-          stories={this.state.storyList}
-        />
+        {list ?
+          <Stories
+            type={type}
+            stories={list}
+          /> :
+          <Loading />
+        }
       </div>
     )
   }
