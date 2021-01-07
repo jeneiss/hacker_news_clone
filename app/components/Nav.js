@@ -6,13 +6,15 @@ export default function Nav(props) {
       <div className='nav__stories'>
         <button
           className='nav__stories-btn btn'
-          onClick={() => props.handleClick('top')}
+          name='top'
+          onClick={(e) => props.handleClick(e)}
         >
           Top
         </button>
         <button
           className='nav__stories-btn btn'
-          onClick={() => props.handleClick('new')}
+          name='new'
+          onClick={(e) => props.handleClick(e)}
         >
           New
         </button>
