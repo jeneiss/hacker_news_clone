@@ -17,6 +17,6 @@ function getItems(data) {
 export function getStories(type) {
   return fetch(`${url}${type}stories.json?print=pretty`)
     .then((response) => response.json())
-    .then((data) => getItems(data.slice(0, 50)))
+    .then((data) => getItems(data.slice(0, 30)))
     .catch((err) => console.log(err, 'Error fetching stories'))
 }
