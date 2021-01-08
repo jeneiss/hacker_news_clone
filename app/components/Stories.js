@@ -6,7 +6,9 @@ export default function Stories({ stories }) {
 
     return (
       <li key={story.id}>
-        <a href={story.url}>{story.title}</a>
+        <div>
+          <a href={story.url}>{story.title}</a>
+        </div>
         <div>
           <div>by {story.by} on {date} with {story.descendants} {story.descendants === 1 ? 'comment' : 'comments'}</div>
         </div>

@@ -12,6 +12,7 @@ export default class App extends React.Component {
     this.state = {
       type: 'top',
       list: null,
+      isLoading: true
     }
 
     this.handleClick = this.handleClick.bind(this)
@@ -31,34 +32,41 @@ export default class App extends React.Component {
 
     this.setState({
       type,
-      list: null
+      list: null,
+      isLoading: true
     })
   }
 
   handleFetch() {
     getStories(this.state.type)
       .then((list) => {
-        this.setState({ list })
+        this.setState({
+          list,
+          isLoading: false
+        })
       })
       .catch((err) => console.log(err))
   }
 
   render() {
-    const { type, list } = this.state
+    const { type, list, isLoading } = this.state
 
     return (
       <div id='wrapper'>
+
         <Nav
           type={type}
           handleClick={this.handleClick}
         />
-        {list ?
+
+        {isLoading ?
+          <Loading /> :
           <Stories
             type={type}
             stories={list}
-          /> :
-          <Loading />
+          />
         }
+
       </div>
     )
   }
