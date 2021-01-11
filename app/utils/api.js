@@ -20,3 +20,9 @@ export function getStories(type) {
     .then((data) => getItems(data.slice(0, 30)))
     .catch((err) => console.log(err, 'Error fetching stories'))
 }
+
+export function getUserInfo(user) {
+  return fetch(`${url}${user}jl.json?print=pretty`)
+    .then((response) => response.json())
+    .catch((err) => console.log(err, 'Error fetching user info'))
+}
