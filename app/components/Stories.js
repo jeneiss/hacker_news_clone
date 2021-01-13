@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Stories({ stories }) {
   return stories.map((story) => {
@@ -10,7 +11,7 @@ export default function Stories({ stories }) {
           <a href={story.url}>{story.title}</a>
         </div>
         <div>
-          <div>by {story.by} on {date} with {story.descendants} {story.descendants === 1 ? 'comment' : 'comments'}</div>
+          <div>by <Link to={`/user?id=${story.by}`}>{story.by}</Link> on {date} with {story.descendants} {story.descendants === 1 ? 'comment' : 'comments'}</div>
         </div>
       </li>
     )

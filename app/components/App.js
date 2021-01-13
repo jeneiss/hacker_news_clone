@@ -2,6 +2,7 @@ import React from 'react'
 import Nav from './Nav'
 import Stories from './Stories'
 import Loading from './Loading'
+import { BrowserRouter as Router } from 'react-router-dom'
 
 import { getStories } from '../utils/api'
 
@@ -54,18 +55,20 @@ export default class App extends React.Component {
     return (
       <div id='wrapper'>
 
-        <Nav
-          type={type}
-          handleClick={this.handleClick}
-        />
-
-        {isLoading ?
-          <Loading /> :
-          <Stories
+        <Router>
+          <Nav
             type={type}
-            stories={list}
+            handleClick={this.handleClick}
           />
-        }
+
+          {isLoading ?
+            <Loading /> :
+            <Stories
+              type={type}
+              stories={list}
+            />
+          }
+        </Router>
 
       </div>
     )
