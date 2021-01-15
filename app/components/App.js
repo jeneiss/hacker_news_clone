@@ -1,8 +1,10 @@
 import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import Nav from './Nav'
 import Stories from './Stories'
 import Loading from './Loading'
-import { BrowserRouter as Router } from 'react-router-dom'
+import User from './User'
 
 import { getStories } from '../utils/api'
 
@@ -54,23 +56,34 @@ export default class App extends React.Component {
 
     return (
       <div id='wrapper'>
-
         <Router>
           <Nav
             type={type}
             handleClick={this.handleClick}
           />
+            <Switch>
 
-          {isLoading ?
-            <Loading /> :
-            <Stories
-              type={type}
-              stories={list}
-            />
-          }
-        </Router>
+              <Route
+                path='/user'
+                component={User}
+              />
 
-      </div>
+              {isLoading ?
+                <Loading /> :
+                <Route
+                  path='/'
+                  render={(props) => (
+                    <Stories
+                      {...props}
+                      type={type}
+                      stories={list}
+                    />
+                  )}
+                />
+              }
+            </Switch>
+          </Router>
+        </div>
     )
   }
 }

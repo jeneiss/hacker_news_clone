@@ -1,23 +1,26 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 export default function Nav(props) {
   return (
     <nav className='nav'>
       <div className='nav__stories'>
-        <button
+        <NavLink
+          to='/top'
           className='nav__stories-btn btn'
           name='top'
           onClick={(e) => props.handleClick(e)}
         >
           Top
-        </button>
-        <button
+        </NavLink>
+        <NavLink
+          to='/new'
           className='nav__stories-btn btn'
           name='new'
           onClick={(e) => props.handleClick(e)}
         >
           New
-        </button>
+        </NavLink>
       </div>
 
       <div className='nav__theme'>
