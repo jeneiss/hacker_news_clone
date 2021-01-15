@@ -12,17 +12,22 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-syntax-dynamic-import"
     ]
   },
   "author": "Jennifer Eiss (jeneiss)",
   "license": "ISC",
   "dependencies": {
+    "query-string": "^6.13.8",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
     "babel-loader": "^8.2.2",
