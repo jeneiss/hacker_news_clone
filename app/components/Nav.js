@@ -6,7 +6,7 @@ export default function Nav(props) {
     <nav className='nav'>
       <div className='nav__stories'>
         <NavLink
-          to='/top'
+          to='/'
           className='nav__stories-btn btn'
           name='top'
           onClick={(e) => props.handleClick(e)}

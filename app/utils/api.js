@@ -22,7 +22,14 @@ export function getStories(type) {
 }
 
 export function getUserInfo(user) {
-  return fetch(`${url}${user}jl.json?print=pretty`)
+  return fetch(`${url}user/${user}.json?print=pretty`)
     .then((response) => response.json())
+    .then((data) => {
+      return getItems(data.submitted.slice(0, 20))
+        .then((res) => {
+          res = res.filter((res) => res.type === 'story')
+          return {userInfo: data, userStories: res}
+        })
+    })
     .catch((err) => console.log(err, 'Error fetching user info'))
 }
