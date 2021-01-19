@@ -5,6 +5,7 @@ import Nav from './Nav'
 import Stories from './Stories'
 import Loading from './Loading'
 import User from './User'
+import Comments from './Comments'
 
 import { getStories } from '../utils/api'
 
@@ -66,6 +67,11 @@ export default class App extends React.Component {
               <Route
                 path='/user'
                 component={User}
+              />
+
+              <Route
+                path='/post'
+                component={Comments}
               />
 
               {isLoading ?

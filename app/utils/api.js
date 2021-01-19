@@ -33,3 +33,10 @@ export function getUserInfo(user) {
     })
     .catch((err) => console.log(err, 'Error fetching user info'))
 }
+
+export function getComments(id) {
+  return fetch(`${url}item/${id}.json?print=pretty`)
+    .then((response) => response.json())
+    .then((data) => getItems(data.kids))
+    .catch((err) => console.log(err, 'Error fetching comments'))
+}

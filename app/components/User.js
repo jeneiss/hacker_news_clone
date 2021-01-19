@@ -1,9 +1,9 @@
 import React from 'react'
 import queryString from 'query-string'
-import { getUserInfo } from '../utils/api'
 import Stories from './Stories'
 import Loading from './Loading'
 
+import { getUserInfo } from '../utils/api'
 export default class User extends React.Component {
   constructor(props) {
     super(props)
@@ -50,7 +50,7 @@ export default class User extends React.Component {
     else {
       const { username, userInfo, userStories } = this.state
       const created = new Date(userInfo.created * 1000).toLocaleString()
-      console.log(userStories)
+
       return (
           <>
             <div>

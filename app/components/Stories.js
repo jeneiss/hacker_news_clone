@@ -11,7 +11,7 @@ export default function Stories({ stories }) {
           <a href={story.url}>{story.title}</a>
         </div>
         <div>
-          <div>by <Link to={`/user?id=${story.by}`}>{story.by}</Link> on {date} with {story.descendants} {story.descendants === 1 ? 'comment' : 'comments'}</div>
+          <div>by <Link to={`/user?id=${story.by}`}>{story.by}</Link> on {date} with <Link to={`/post?id=${story.id}`}>{story.descendants}</Link> {story.descendants === 1 ? 'comment' : 'comments'}</div>
         </div>
       </li>
     )
