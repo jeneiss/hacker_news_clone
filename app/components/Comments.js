@@ -2,6 +2,7 @@ import React from 'react'
 import queryString from 'query-string'
 
 import Loading from './Loading'
+import Post from './Post'
 import { Link } from 'react-router-dom'
 import { getComments } from '../utils/api'
 
@@ -42,15 +43,19 @@ export default class Comments extends React.Component {
     if (isLoading) {
       return <Loading />
     } else {
-      const date = new Date(postInfo.time * 1000).toLocaleString()
-
       return (
         <>
-          <h1><a href={postInfo.url}>{postInfo.title}</a></h1>
-          <div>
-            <div>by <Link to={`/user?id=${postInfo.by}`}>{postInfo.by}</Link> on {date} with <Link to={`/post?id=${postInfo.id}`}>{postInfo.descendants}</Link> {postInfo.descendants === 1 ? 'comment' : 'comments'}</div>
-          </div>
-          <ul>
+          <Post
+            time={postInfo.time}
+            id={postInfo.id}
+            url={postInfo.url}
+            title={postInfo.title}
+            by={postInfo.by}
+            descendants={postInfo.descendants}
+          />
+
+          {comments &&
+            <ul>
             {comments.map((comment) => {
               const time = new Date(comment.time * 1000).toLocaleString()
 
@@ -62,6 +67,7 @@ export default class Comments extends React.Component {
               )
             })}
           </ul>
+          }
         </>
       )
     }

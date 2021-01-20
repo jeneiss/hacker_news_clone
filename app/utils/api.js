@@ -38,6 +38,10 @@ export function getComments(id) {
   return fetch(`${url}item/${id}.json?print=pretty`)
     .then((response) => response.json())
     .then((data) => {
+      if (data.descendants === 0) {
+        return {postInfo: data, comments: undefined}
+      }
+
       return getItems(data.kids)
         .then((res) => ({postInfo: data, comments: res}))
     })
