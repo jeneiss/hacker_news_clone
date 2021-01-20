@@ -37,6 +37,9 @@ export function getUserInfo(user) {
 export function getComments(id) {
   return fetch(`${url}item/${id}.json?print=pretty`)
     .then((response) => response.json())
-    .then((data) => getItems(data.kids))
+    .then((data) => {
+      return getItems(data.kids)
+        .then((res) => ({postInfo: data, comments: res}))
+    })
     .catch((err) => console.log(err, 'Error fetching comments'))
 }

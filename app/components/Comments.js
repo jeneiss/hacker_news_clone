@@ -11,6 +11,7 @@ export default class Comments extends React.Component {
 
     this.state = {
       postId: null,
+      postInfo: null,
       comments: null,
       isLoading: true
     }
@@ -26,8 +27,9 @@ export default class Comments extends React.Component {
 
   handleFetch() {
     getComments(this.state.postId)
-      .then((comments) => {
+      .then(({postInfo, comments}) => {
         this.setState({
+          postInfo,
           comments,
           isLoading: false
         })
@@ -35,24 +37,32 @@ export default class Comments extends React.Component {
   }
 
   render() {
-    const { comments, isLoading } = this.state
+    const { postInfo, comments, isLoading } = this.state
 
     if (isLoading) {
       return <Loading />
     } else {
-      return (
-        <ul>
-          {comments.map((comment) => {
-            const time = new Date(comment.time * 1000).toLocaleString()
+      const date = new Date(postInfo.time * 1000).toLocaleString()
 
-            return (
-              <li key={comment.id}>
-                <div>by <Link to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
-                <div dangerouslySetInnerHTML={{__html: comment.text}} />
-              </li>
-            )
-          })}
-        </ul>
+      return (
+        <>
+          <h1><a href={postInfo.url}>{postInfo.title}</a></h1>
+          <div>
+            <div>by <Link to={`/user?id=${postInfo.by}`}>{postInfo.by}</Link> on {date} with <Link to={`/post?id=${postInfo.id}`}>{postInfo.descendants}</Link> {postInfo.descendants === 1 ? 'comment' : 'comments'}</div>
+          </div>
+          <ul>
+            {comments.map((comment) => {
+              const time = new Date(comment.time * 1000).toLocaleString()
+
+              return (
+                <li key={comment.id}>
+                  <div>by <Link to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
+                  <div dangerouslySetInnerHTML={{__html: comment.text}} />
+                </li>
+              )
+            })}
+          </ul>
+        </>
       )
     }
   }
