@@ -57,10 +57,13 @@ export default class User extends React.Component {
               <h1>{username}</h1>
               <div>joined {created} and has {userInfo.karma} karma</div>
             </div>
-            <div>
-              <h2>Recent stories</h2>
-              <Stories stories={userStories} />
-            </div>
+            {userStories.length === 0 ?
+              <h2>No recent stories</h2> :
+              <div>
+                <h2>Recent stories</h2>
+                <Stories stories={userStories} />
+              </div>
+            }
           </>
       )
     }
