@@ -2,6 +2,7 @@ import React from 'react'
 import queryString from 'query-string'
 
 import Loading from './Loading'
+import { Link } from 'react-router-dom'
 import { getComments } from '../utils/api'
 
 export default class Comments extends React.Component {
@@ -35,7 +36,7 @@ export default class Comments extends React.Component {
 
   render() {
     const { comments, isLoading } = this.state
-    console.log(comments)
+
     if (isLoading) {
       return <Loading />
     } else {
@@ -43,9 +44,10 @@ export default class Comments extends React.Component {
         <ul>
           {comments.map((comment) => {
             const time = new Date(comment.time * 1000).toLocaleString()
+
             return (
               <li key={comment.id}>
-                <div>{`by ${comment.by} on ${time}`}</div>
+                <div>by <Link to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
                 <div dangerouslySetInnerHTML={{__html: comment.text}} />
               </li>
             )
