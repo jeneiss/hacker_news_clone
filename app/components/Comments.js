@@ -46,6 +46,7 @@ export default class Comments extends React.Component {
       return (
         <>
           <Post
+            header={true}
             time={postInfo.time}
             id={postInfo.id}
             url={postInfo.url}

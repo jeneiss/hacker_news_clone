@@ -5,6 +5,7 @@ export default function Stories({ stories }) {
   return stories.map((story) => {
     return (
       <Post
+        header={false}
         key={story.id}
         time={story.time}
         id={story.id}
