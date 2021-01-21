@@ -1,7 +1,15 @@
 import React from 'react'
 
 export default function Loading() {
-    return (
-        <h1>Loading...</h1>
-    )
+  return (
+    <div className='loading__container'>
+      <div className='loading__letter'>L</div>
+      <div className='loading__letter'>O</div>
+      <div className='loading__letter'>A</div>
+      <div className='loading__letter'>D</div>
+      <div className='loading__letter'>I</div>
+      <div className='loading__letter'>N</div>
+      <div className='loading__letter'>G</div>
+    </div>
+  )
 }
