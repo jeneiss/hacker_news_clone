@@ -50,6 +50,7 @@ export default class Comments extends React.Component {
             time={postInfo.time}
             id={postInfo.id}
             url={postInfo.url}
+            text={postInfo.text}
             title={postInfo.title}
             by={postInfo.by}
             descendants={postInfo.descendants}
