@@ -56,6 +56,7 @@ export default class User extends React.Component {
             <div>
               <h1>{username}</h1>
               <div>joined {created} and has {userInfo.karma} karma</div>
+              {userInfo.about && <div dangerouslySetInnerHTML={{__html: userInfo.about}}></div>}
             </div>
             {userStories.length === 0 ?
               <h2>No recent stories</h2> :
