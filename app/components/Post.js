@@ -6,7 +6,7 @@ export default function Post({header, time, id, url, title, by, descendants, tex
 
   if (header) {
     return (
-      <div>
+      <div className='header-post'>
         {url ?
           <h1>
             <a
@@ -25,10 +25,10 @@ export default function Post({header, time, id, url, title, by, descendants, tex
                 {title}
               </Link>
             </h1>
-            <div dangerouslySetInnerHTML={{__html: text}}></div>
+            <div className='post__text' dangerouslySetInnerHTML={{__html: text}}></div>
           </>
         }
-        <div>
+        <div className='meta-info'>
           by <Link to={`/user?id=${by}`}>{by}</Link> on {date} with <Link to={`/post?id=${id}`}>{descendants}</Link> {descendants === 1 ? 'comment' : 'comments'}
         </div>
       </div>
@@ -54,7 +54,7 @@ export default function Post({header, time, id, url, title, by, descendants, tex
             </>
           }
         </div>
-        <div>
+        <div className='meta-info'>
           by <Link className='link' to={`/user?id=${by}`}>{by}</Link> on {date} with <Link className='link' to={`/post?id=${id}`}>{descendants}</Link> {descendants === 1 ? 'comment' : 'comments'}
         </div>
       </li>

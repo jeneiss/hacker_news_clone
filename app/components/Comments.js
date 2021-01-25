@@ -62,9 +62,9 @@ export default class Comments extends React.Component {
               const time = new Date(comment.time * 1000).toLocaleString()
 
               return (
-                <li key={comment.id}>
-                  <div>by <Link className='link' to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
-                  <div dangerouslySetInnerHTML={{__html: comment.text}} />
+                <li className='comment' key={comment.id}>
+                  <div className='meta-info'>by <Link className='link' to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
+                  <div className='comment__text' dangerouslySetInnerHTML={{__html: comment.text}} />
                 </li>
               )
             })}

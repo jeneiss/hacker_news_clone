@@ -52,11 +52,11 @@ export default class User extends React.Component {
       const created = new Date(userInfo.created * 1000).toLocaleString()
 
       return (
-          <>
+          <div className='user'>
             <div>
               <h1>{username}</h1>
-              <div>joined {created} and has {userInfo.karma} karma</div>
-              {userInfo.about && <div dangerouslySetInnerHTML={{__html: userInfo.about}}></div>}
+              <div className='meta-info'>joined <strong>{created}</strong> and has <strong>{userInfo.karma}</strong> karma</div>
+              {userInfo.about && <div className='about-info' dangerouslySetInnerHTML={{__html: userInfo.about}}></div>}
             </div>
             {userStories.length === 0 ?
               <h2>No recent stories</h2> :
@@ -65,7 +65,7 @@ export default class User extends React.Component {
                 <Stories stories={userStories} />
               </div>
             }
-          </>
+          </div>
       )
     }
   }

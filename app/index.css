@@ -18,13 +18,18 @@
 
 /* GENERAL STYLES*/
 body {
+  margin: 0;
   font-family: 'Open sans', Arial, sans-serif;
   font-size: 16px;
 }
 
+#wrapper {
+  margin-top: 3rem;
+}
+
 .loading__container {
   display: flex;
-  width: 3rem;
+  width: 10rem;
   margin: 3rem auto;
   text-align: center;
 }
@@ -66,8 +71,37 @@ body {
 
 @keyframes letterBop {
   0%    {bottom: 0;}
-  50%   {bottom: 1rem; color: red}
+  50%   {bottom: 1rem; color: rgb(187, 46, 31)}
   100%  {bottom: 0rem}
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.nav__stories {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 6rem;
+}
+
+.nav__link {
+  color:rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.active {
+  color: rgb(187, 46, 31)!important;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
 }
 
 .title-link {
@@ -77,7 +111,7 @@ body {
 }
 
 .link {
-  color: #000;
+  color:rgb(0, 0, 0);
 }
 
 ul {
@@ -87,4 +121,48 @@ ul {
 li {
   margin: 1rem;
   list-style: none;
+}
+
+a {
+  word-wrap: break-word;
+}
+
+.user {
+  margin: 1rem;
+}
+
+.meta-info {
+  color: gray;
+}
+
+.header-post {
+  margin: 1rem;
+}
+
+.about-info {
+  margin: 1rem;
+  word-wrap: break-word;
+}
+
+.post__text {
+  margin-bottom: 1rem;
+}
+
+.comment {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.comment__text {
+  margin-top: 0.5rem;
+}
+
+
+/* DESKTOP STYLES */
+@media only screen and (min-width: 56rem) {
+  #wrapper {
+    max-width: 56rem;
+    margin: 3rem auto 0;
+  }
 }

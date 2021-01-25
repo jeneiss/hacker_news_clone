@@ -7,7 +7,8 @@ export default function Nav(props) {
       <div className='nav__stories'>
         <NavLink
           to='/'
-          className='nav__stories-btn btn'
+          className='nav__stories-btn nav__link'
+          activeClassName='active' exact
           name='top'
           onClick={(e) => props.handleClick(e)}
         >
@@ -15,7 +16,8 @@ export default function Nav(props) {
         </NavLink>
         <NavLink
           to='/new'
-          className='nav__stories-btn btn'
+          className='nav__stories-btn nav__link'
+          activeClassName='active' exact
           name='new'
           onClick={(e) => props.handleClick(e)}
         >
