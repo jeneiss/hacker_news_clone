@@ -8,9 +8,23 @@ export default function Post({header, time, id, url, title, by, descendants, tex
     return (
       <div>
         {url ?
-          <h1><a href={url}>{title}</a></h1> :
+          <h1>
+            <a
+              className='title-link'
+              href={url}
+            >
+              {title}
+            </a>
+          </h1> :
           <>
-            <h1><Link to={`/post?id=${id}`}>{title}</Link></h1>
+            <h1>
+              <Link
+                className='title-link'
+                to={`/post?id=${id}`}
+              >
+                {title}
+              </Link>
+            </h1>
             <div dangerouslySetInnerHTML={{__html: text}}></div>
           </>
         }
@@ -24,14 +38,24 @@ export default function Post({header, time, id, url, title, by, descendants, tex
       <li>
         <div>
           {url ?
-            <a href={url}>{title}</a> :
+            <a
+              className='title-link'
+              href={url}
+            >
+              {title}
+            </a> :
             <>
-              <Link to={`/post?id=${id}`}>{title}</Link>
+              <Link
+                className='title-link'
+                to={`/post?id=${id}`}
+              >
+                {title}
+              </Link>
             </>
           }
         </div>
         <div>
-          by <Link to={`/user?id=${by}`}>{by}</Link> on {date} with <Link to={`/post?id=${id}`}>{descendants}</Link> {descendants === 1 ? 'comment' : 'comments'}
+          by <Link className='link' to={`/user?id=${by}`}>{by}</Link> on {date} with <Link className='link' to={`/post?id=${id}`}>{descendants}</Link> {descendants === 1 ? 'comment' : 'comments'}
         </div>
       </li>
     )

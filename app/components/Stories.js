@@ -2,7 +2,7 @@ import React from 'react'
 import Post from './Post'
 
 export default function Stories({ stories }) {
-  return stories.map((story) => {
+  const storyList = stories.map((story) => {
     return (
       <Post
         header={false}
@@ -16,4 +16,10 @@ export default function Stories({ stories }) {
       />
     )
   })
+
+  return (
+    <ul>
+      {storyList}
+    </ul>
+  )
 }

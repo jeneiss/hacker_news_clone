@@ -63,7 +63,7 @@ export default class Comments extends React.Component {
 
               return (
                 <li key={comment.id}>
-                  <div>by <Link to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
+                  <div>by <Link className='link' to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
                   <div dangerouslySetInnerHTML={{__html: comment.text}} />
                 </li>
               )
