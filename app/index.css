@@ -23,8 +23,9 @@ body {
   font-size: 16px;
 }
 
-#wrapper {
-  margin-top: 3rem;
+.dark-theme {
+  background-color:rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
 
 .loading__container {
@@ -75,6 +76,11 @@ body {
   100%  {bottom: 0rem}
 }
 
+.content__container {
+  min-height: 100vh;
+  padding: 3rem 0;
+}
+
 .nav {
   display: flex;
   justify-content: space-between;
@@ -96,8 +102,18 @@ body {
   text-decoration: none;
 }
 
+.dark-theme .nav__link {
+  color: rgb(255, 255, 255);
+}
+
 .active {
   color: rgb(187, 46, 31)!important;
+}
+
+.nav__theme-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 2.5rem;
 }
 
 h1 {
@@ -110,8 +126,16 @@ h1 {
   text-decoration: none;
 }
 
+.dark-theme .title-link {
+  color: rgb(255, 255, 255);
+}
+
 .link {
   color:rgb(0, 0, 0);
+}
+
+.dark-theme .link {
+  color: rgb(255, 255, 255);
 }
 
 ul {
@@ -135,6 +159,10 @@ a {
   color: gray;
 }
 
+.dark-theme .meta-info a {
+  color: rgb(255, 255, 255);
+}
+
 .header-post {
   margin: 1rem;
 }
@@ -154,15 +182,23 @@ a {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+.dark-theme .comment {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 .comment__text {
   margin-top: 0.5rem;
+}
+
+.dark-theme .comment__text a {
+  color: rgb(255, 255, 255);
 }
 
 
 /* DESKTOP STYLES */
 @media only screen and (min-width: 56rem) {
-  #wrapper {
+  .content__container {
     max-width: 56rem;
-    margin: 3rem auto 0;
+    margin: 0 auto;
   }
 }

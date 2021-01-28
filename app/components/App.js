@@ -6,6 +6,7 @@ import Stories from './Stories'
 import Loading from './Loading'
 import User from './User'
 import Comments from './Comments'
+import { ThemeConsumer } from './ThemeContext'
 
 import { getStories } from '../utils/api'
 
@@ -56,40 +57,48 @@ export default class App extends React.Component {
     const { type, list, isLoading } = this.state
 
     return (
-      <div id='wrapper'>
-        <Router>
-          <Nav
-            type={type}
-            handleClick={this.handleClick}
-          />
-            <Switch>
-
-              <Route
-                path='/user'
-                component={User}
-              />
-
-              <Route
-                path='/post'
-                component={Comments}
-              />
-
-              {isLoading ?
-                <Loading /> :
-                <Route
-                  path='/'
-                  render={(props) => (
-                    <Stories
-                      {...props}
-                      type={type}
-                      stories={list}
-                    />
-                  )}
+      <ThemeConsumer>
+        {context => (
+          <div id='wrapper' className={`${context.theme}-theme`}>
+            <div className='content__container'>
+              <Router>
+                <Nav
+                  type={type}
+                  handleClick={this.handleClick}
+                  handleThemeClick={context.toggleTheme}
+                  themeType={context.theme}
                 />
-              }
-            </Switch>
-          </Router>
-        </div>
+                <Switch>
+
+                  <Route
+                    path='/user'
+                    component={User}
+                  />
+
+                  <Route
+                    path='/post'
+                    component={Comments}
+                  />
+
+                  {isLoading ?
+                    <Loading /> :
+                    <Route
+                      path='/'
+                      render={(props) => (
+                        <Stories
+                          {...props}
+                          type={type}
+                          stories={list}
+                        />
+                      )}
+                    />
+                  }
+                </Switch>
+              </Router>
+            </div>
+          </div>
+          )}
+      </ThemeConsumer>
     )
   }
 }

@@ -1,7 +1,8 @@
 import React from 'react'
+
 import { NavLink } from 'react-router-dom'
 
-export default function Nav(props) {
+export default function Nav({ handleClick, handleThemeClick, themeType}) {
   return (
     <nav className='nav'>
       <div className='nav__stories'>
@@ -10,7 +11,7 @@ export default function Nav(props) {
           className='nav__stories-btn nav__link'
           activeClassName='active' exact
           name='top'
-          onClick={(e) => props.handleClick(e)}
+          onClick={(e) => handleClick(e)}
         >
           Top
         </NavLink>
@@ -19,14 +20,19 @@ export default function Nav(props) {
           className='nav__stories-btn nav__link'
           activeClassName='active' exact
           name='new'
-          onClick={(e) => props.handleClick(e)}
+          onClick={(e) => handleClick(e)}
         >
           New
         </NavLink>
       </div>
 
       <div className='nav__theme'>
-        <button className='nav__theme-btn btn'>🔦</button>
+        <button
+          className='nav__theme-btn btn'
+          onClick={handleThemeClick}
+        >
+          {themeType === 'light' ? '🔦' : '💡' }
+        </button>
       </div>
     </nav>
   )
