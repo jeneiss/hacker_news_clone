@@ -2,7 +2,7 @@ import React from 'react'
 
 import { NavLink } from 'react-router-dom'
 
-export default function Nav({ handleClick, handleThemeClick, themeType}) {
+function Nav({ handleClick, handleThemeClick, themeType}) {
   return (
     <nav className='nav'>
       <div className='nav__stories'>
@@ -37,3 +37,5 @@ export default function Nav({ handleClick, handleThemeClick, themeType}) {
     </nav>
   )
 }
+
+export default Nav
