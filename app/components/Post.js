@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Post({header, time, id, url, title, by, descendants, text}) {
+function Post({header, time, id, url, title, by, descendants, text}) {
   const date = new Date(time * 1000).toLocaleString()
 
   if (header) {
@@ -61,3 +61,5 @@ export default function Post({header, time, id, url, title, by, descendants, tex
     )
   }
 }
+
+export default Post

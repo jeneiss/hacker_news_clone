@@ -1,7 +1,7 @@
 import React from 'react'
 import Post from './Post'
 
-export default function Stories({ stories }) {
+function Stories({ stories }) {
   const storyList = stories.map((story) => {
     return (
       <Post
@@ -23,3 +23,5 @@ export default function Stories({ stories }) {
     </ul>
   )
 }
+
+export default Stories

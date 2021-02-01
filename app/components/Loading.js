@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Loading() {
+function Loading() {
   return (
     <div className='loading__container'>
       <div className='loading__letter'>L</div>
@@ -13,3 +13,5 @@ export default function Loading() {
     </div>
   )
 }
+
+export default Loading
