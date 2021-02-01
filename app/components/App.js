@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Nav from './Nav'
@@ -10,95 +10,74 @@ import { ThemeConsumer } from './ThemeContext'
 
 import { getStories } from '../utils/api'
 
-export default class App extends React.Component {
-  constructor() {
-    super()
+function App() {
+  const [ type, setType ] = useState('top')
+  const [ list, setList ] = useState(null)
+  const [ isLoading, setIsLoading ] = useState(true)
 
-    this.state = {
-      type: 'top',
-      list: null,
-      isLoading: true
-    }
-
-    this.handleClick = this.handleClick.bind(this)
-    this.handleFetch = this.handleFetch.bind(this)
+  const handleClick = (e) => {
+    setType(e.target.name)
+    setList(null)
+    setIsLoading(true)
   }
 
-  componentDidMount() {
-    this.handleFetch()
-  }
-
-  componentDidUpdate() {
-    if (!this.state.list) this.handleFetch()
-  }
-
-  handleClick(e) {
-    const type = e.target.name
-
-    this.setState({
-      type,
-      list: null,
-      isLoading: true
-    })
-  }
-
-  handleFetch() {
-    getStories(this.state.type)
+  const handleFetch = () => {
+    getStories(type)
       .then((list) => {
-        this.setState({
-          list,
-          isLoading: false
-        })
+        setList(list)
+        setIsLoading(false)
       })
       .catch((err) => console.log(err))
   }
 
-  render() {
-    const { type, list, isLoading } = this.state
+  useEffect(() => {
+    handleFetch()
+  }, [isLoading])
 
-    return (
-      <ThemeConsumer>
-        {context => (
-          <div id='wrapper' className={`${context.theme}-theme`}>
-            <div className='content__container'>
-              <Router>
-                <Nav
-                  type={type}
-                  handleClick={this.handleClick}
-                  handleThemeClick={context.toggleTheme}
-                  themeType={context.theme}
+  return (
+    <ThemeConsumer>
+      {context => (
+        <div id='wrapper' className={`${context.theme}-theme`}>
+          <div className='content__container'>
+            <Router>
+              <Nav
+                type={type}
+                handleClick={handleClick}
+                handleThemeClick={context.toggleTheme}
+                themeType={context.theme}
+              />
+              <Switch>
+
+                <Route
+                  path='/user'
+                  component={User}
                 />
-                <Switch>
 
+                <Route
+                  path='/post'
+                  component={Comments}
+                />
+
+                {isLoading ?
+                  <Loading /> :
                   <Route
-                    path='/user'
-                    component={User}
+                    path='/'
+                    render={(props) => (
+                      <Stories
+                        {...props}
+                        type={type}
+                        stories={list}
+                      />
+                    )}
                   />
-
-                  <Route
-                    path='/post'
-                    component={Comments}
-                  />
-
-                  {isLoading ?
-                    <Loading /> :
-                    <Route
-                      path='/'
-                      render={(props) => (
-                        <Stories
-                          {...props}
-                          type={type}
-                          stories={list}
-                        />
-                      )}
-                    />
-                  }
-                </Switch>
-              </Router>
-            </div>
+                }
+              </Switch>
+            </Router>
           </div>
-          )}
-      </ThemeConsumer>
-    )
-  }
+        </div>
+        )}
+    </ThemeConsumer>
+  )
 }
+
+export default App
