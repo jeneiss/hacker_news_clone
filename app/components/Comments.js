@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import queryString from 'query-string'
 
 import Loading from './Loading'
@@ -6,72 +6,61 @@ import Post from './Post'
 import { Link } from 'react-router-dom'
 import { getComments } from '../utils/api'
 
-export default class Comments extends React.Component {
-  constructor(props) {
-    super(props)
+function Comments() {
+  const [post, setPost ] = useState({postId: queryString.parse(location.search).id, postInfo: null, comments: null})
+  const [ isLoading, setIsLoading ] = useState(true)
 
-    this.state = {
-      postId: null,
-      postInfo: null,
-      comments: null,
-      isLoading: true
-    }
-  }
-
-  componentDidMount() {
-    this.setState({postId: queryString.parse(location.search).id})
-  }
-
-  componentDidUpdate() {
-    if (!this.state.comments) this.handleFetch()
-  }
-
-  handleFetch() {
-    getComments(this.state.postId)
+  const handleFetch = () => {
+    getComments(post.postId)
       .then(({postInfo, comments}) => {
-        this.setState({
-          postInfo,
-          comments,
-          isLoading: false
-        })
+        setPost(prevState => (
+          {
+            ...prevState,
+            postInfo,
+            comments
+          }
+        ))
+        setIsLoading(false)
       })
   }
 
-  render() {
-    const { postInfo, comments, isLoading } = this.state
+  useEffect(() => {
+    handleFetch()
+  }, [isLoading])
 
-    if (isLoading) {
-      return <Loading />
-    } else {
-      return (
-        <>
-          <Post
-            header={true}
-            time={postInfo.time}
-            id={postInfo.id}
-            url={postInfo.url}
-            text={postInfo.text}
-            title={postInfo.title}
-            by={postInfo.by}
-            descendants={postInfo.descendants}
-          />
+  if (isLoading) {
+    return <Loading />
+  } else {
+    return (
+      <>
+        <Post
+          header={true}
+          time={post.postInfo.time}
+          id={post.postInfo.id}
+          url={post.postInfo.url}
+          text={post.postInfo.text}
+          title={post.postInfo.title}
+          by={post.postInfo.by}
+          descendants={post.postInfo.descendants}
+        />
 
-          {comments &&
-            <ul>
-            {comments.map((comment) => {
-              const time = new Date(comment.time * 1000).toLocaleString()
+        {post.comments &&
+          <ul>
+          {post.comments.map((comment) => {
+            const time = new Date(comment.time * 1000).toLocaleString()
 
-              return (
-                <li className='comment' key={comment.id}>
-                  <div className='meta-info'>by <Link className='link' to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
-                  <div className='comment__text' dangerouslySetInnerHTML={{__html: comment.text}} />
-                </li>
-              )
-            })}
-          </ul>
-          }
-        </>
-      )
-    }
+            return (
+              <li className='comment' key={comment.id}>
+                <div className='meta-info'>by <Link className='link' to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
+                <div className='comment__text' dangerouslySetInnerHTML={{__html: comment.text}} />
+              </li>
+            )
+          })}
+        </ul>
+        }
+      </>
+    )
   }
 }
+
+export default Comments
