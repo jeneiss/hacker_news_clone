@@ -1,5 +1,5 @@
 # hacker_news_clone
- A (soft) hacker news clone built with React/Webpack/Babel and using stateful class components and context for light/dark themes. Consumes the [Hacker News API](https://github.com/HackerNews/API)
+ A (soft) hacker news clone built with React/Webpack/Babel and using stateful class components and context for light/dark themes. Consumes the [Hacker News API](https://github.com/HackerNews/API).
  
 Version that uses hooks is on hooks-conversion branch.
 
