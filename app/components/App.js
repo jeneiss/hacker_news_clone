@@ -49,12 +49,12 @@ function App() {
           <Switch>
 
             <Route
-              path='/user'
+              path='/user/:id'
               component={User}
             />
 
             <Route
-              path='/post'
+              path='/post/:id'
               component={Comments}
             />
 

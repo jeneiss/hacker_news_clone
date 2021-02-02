@@ -20,7 +20,7 @@ function Post({header, time, id, url, title, by, descendants, text}) {
             <h1>
               <Link
                 className='title-link'
-                to={`/post?id=${id}`}
+                to={`/post/${id}`}
               >
                 {title}
               </Link>
@@ -29,7 +29,7 @@ function Post({header, time, id, url, title, by, descendants, text}) {
           </>
         }
         <div className='meta-info'>
-          by <Link to={`/user?id=${by}`}>{by}</Link> on {date} with <Link to={`/post?id=${id}`}>{descendants}</Link> {descendants === 1 ? 'comment' : 'comments'}
+          by <Link to={`/user/${by}`}>{by}</Link> on {date} with <Link to={`/post/${id}`}>{descendants}</Link> {descendants === 1 ? 'comment' : 'comments'}
         </div>
       </div>
     )
@@ -47,7 +47,7 @@ function Post({header, time, id, url, title, by, descendants, text}) {
             <>
               <Link
                 className='title-link'
-                to={`/post?id=${id}`}
+                to={`/post/${id}`}
               >
                 {title}
               </Link>
@@ -55,7 +55,7 @@ function Post({header, time, id, url, title, by, descendants, text}) {
           }
         </div>
         <div className='meta-info'>
-          by <Link className='link' to={`/user?id=${by}`}>{by}</Link> on {date} with <Link className='link' to={`/post?id=${id}`}>{descendants}</Link> {descendants === 1 ? 'comment' : 'comments'}
+          by <Link className='link' to={`/user/${by}`}>{by}</Link> on {date} with <Link className='link' to={`/post/${id}`}>{descendants}</Link> {descendants === 1 ? 'comment' : 'comments'}
         </div>
       </li>
     )

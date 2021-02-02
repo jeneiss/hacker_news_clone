@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import queryString from 'query-string'
 
 import Loading from './Loading'
 import Post from './Post'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { getComments } from '../utils/api'
 
 function Comments() {
-  const [post, setPost ] = useState({postId: queryString.parse(location.search).id, postInfo: null, comments: null})
+  const { id } = useParams()
+  const [post, setPost ] = useState({postId: id, postInfo: null, comments: null})
   const [ isLoading, setIsLoading ] = useState(true)
 
   const handleFetch = () => {
@@ -51,7 +51,7 @@ function Comments() {
 
             return (
               <li className='comment' key={comment.id}>
-                <div className='meta-info'>by <Link className='link' to={`/user?id=${comment.by}`}>{comment.by}</Link> on {time}</div>
+                <div className='meta-info'>by <Link className='link' to={`/user/${comment.by}`}>{comment.by}</Link> on {time}</div>
                 <div className='comment__text' dangerouslySetInnerHTML={{__html: comment.text}} />
               </li>
             )
