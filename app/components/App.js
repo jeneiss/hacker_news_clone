@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import Nav from './Nav'
@@ -6,7 +6,7 @@ import Stories from './Stories'
 import Loading from './Loading'
 import User from './User'
 import Comments from './Comments'
-import { ThemeConsumer } from './ThemeContext'
+import { ThemeContext } from './ThemeContext'
 
 import { getStories } from '../utils/api'
 
@@ -14,6 +14,8 @@ function App() {
   const [ type, setType ] = useState('top')
   const [ list, setList ] = useState(null)
   const [ isLoading, setIsLoading ] = useState(true)
+
+  const { theme, toggleTheme } = useContext(ThemeContext)
 
   const handleClick = (e) => {
     setType(e.target.name)
@@ -35,48 +37,44 @@ function App() {
   }, [isLoading])
 
   return (
-    <ThemeConsumer>
-      {context => (
-        <div id='wrapper' className={`${context.theme}-theme`}>
-          <div className='content__container'>
-            <Router>
-              <Nav
-                type={type}
-                handleClick={handleClick}
-                handleThemeClick={context.toggleTheme}
-                themeType={context.theme}
-              />
-              <Switch>
+    <div id='wrapper' className={`${theme}-theme`}>
+      <div className='content__container'>
+        <Router>
+          <Nav
+            type={type}
+            handleClick={handleClick}
+            handleThemeClick={toggleTheme}
+            themeType={theme}
+          />
+          <Switch>
 
-                <Route
-                  path='/user'
-                  component={User}
-                />
+            <Route
+              path='/user'
+              component={User}
+            />
 
-                <Route
-                  path='/post'
-                  component={Comments}
-                />
+            <Route
+              path='/post'
+              component={Comments}
+            />
 
-                {isLoading ?
-                  <Loading /> :
-                  <Route
-                    path='/'
-                    render={(props) => (
-                      <Stories
-                        {...props}
-                        type={type}
-                        stories={list}
-                      />
-                    )}
+            {isLoading ?
+              <Loading /> :
+              <Route
+                path='/'
+                render={(props) => (
+                  <Stories
+                    {...props}
+                    type={type}
+                    stories={list}
                   />
-                }
-              </Switch>
-            </Router>
-          </div>
-        </div>
-        )}
-    </ThemeConsumer>
+                )}
+              />
+            }
+          </Switch>
+        </Router>
+      </div>
+    </div>
   )
 }
 

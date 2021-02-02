@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
-const { Provider, Consumer } = React.createContext()
+const ThemeContext = React.createContext()
 
-function ThemeProvider({ children }) {
+function ThemeContextProvider({ children }) {
   const [ theme, setTheme ] = useState('light')
 
   const toggleTheme = () => {
@@ -10,10 +10,10 @@ function ThemeProvider({ children }) {
   }
 
   return (
-    <Provider value={{theme: theme, toggleTheme: toggleTheme}}>
+    <ThemeContext.Provider value={{theme, toggleTheme}}>
       {children}
-    </Provider>
+    </ThemeContext.Provider>
   )
 }
 
-export { ThemeProvider, Consumer as ThemeConsumer }
+export { ThemeContextProvider, ThemeContext }
